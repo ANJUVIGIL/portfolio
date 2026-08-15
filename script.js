@@ -1,4 +1,51 @@
-const qs=s=>document.querySelector(s),qsa=s=>document.querySelectorAll(s),glow=qs('.cursor-glow');addEventListener('pointermove',e=>{glow.style.left=e.clientX+'px';glow.style.top=e.clientY+'px'});const menu=qs('.hamburger'),nav=qs('.navlinks');menu.onclick=()=>{nav.classList.toggle('open');menu.textContent=nav.classList.contains('open')?'×':'☰'};qsa('.navlinks a').forEach(a=>a.onclick=()=>nav.classList.remove('open'));
-const words=['.NET Developer','Full-Stack Developer','API Integration Specialist'],typed=qs('#typed');let wi=0,ci=0,back=false;function type(){const w=words[wi];typed.textContent=w.slice(0,ci);if(!back&&ci<w.length)ci++;else if(!back){back=true;return setTimeout(type,1400)}else if(ci>0)ci--;else{back=false;wi=(wi+1)%words.length}setTimeout(type,back?38:75)}type();
-const obs=new IntersectionObserver(es=>es.forEach(e=>{if(!e.isIntersecting)return;e.target.classList.add('visible');if(e.target.matches('.metrics'))qsa('[data-count]').forEach(animate);obs.unobserve(e.target)}),{threshold:.16});qsa('.reveal,.metrics').forEach(e=>obs.observe(e));function animate(el){const end=+el.dataset.count,start=performance.now();function tick(t){el.textContent=Math.min(end,Math.round((t-start)/1200*end));if(t-start<1200)requestAnimationFrame(tick)}requestAnimationFrame(tick)}
-const sections=qsa('main section[id]'),links=qsa('.navlinks a');addEventListener('scroll',()=>{let id='home';sections.forEach(s=>{if(scrollY>=s.offsetTop-180)id=s.id});links.forEach(a=>a.classList.toggle('active',a.getAttribute('href')==='#'+id))});qs('.theme').onclick=()=>{document.body.classList.toggle('light');qs('.theme').textContent=document.body.classList.contains('light')?'☀':'☾'};qsa('.about-card,.service,.project').forEach(c=>{c.onpointermove=e=>{const r=c.getBoundingClientRect(),x=(e.clientX-r.left)/r.width-.5,y=(e.clientY-r.top)/r.height-.5;c.style.transform='perspective(700px) rotateY('+(x*5)+'deg) rotateX('+(-y*5)+'deg) translateY(-5px)'};c.onpointerleave=()=>c.style.transform=''});qs('#year').textContent=new Date().getFullYear();
+const qs=s=>document.querySelector(s),qsa=s=>document.querySelectorAll(s),glow=qs('.cursor-glow');
+addEventListener('pointermove',e=>{glow.style.left=e.clientX+'px';
+glow.style.top=e.clientY+'px'});
+const menu=qs('.hamburger'),nav=qs('.navlinks');
+menu.onclick=()=>{nav.classList.toggle('open');
+menu.textContent=nav.classList.contains('open')?'×':'☰'};
+qsa('.navlinks a').forEach(a=>a.onclick=()=>nav.classList.remove('open'));
+
+const words=['.NET Developer','Full-Stack Developer','API Integration Specialist'],typed=qs('#typed');
+let wi=0,ci=0,back=false;
+function type(){const w=words[wi];
+typed.textContent=w.slice(0,ci);
+if(!back&&ci<w.length)ci++;
+else if(!back){back=true;
+return setTimeout(type,1400)}else if(ci>0)ci--;
+else{back=false;
+wi=(wi+1)%words.length}setTimeout(type,back?38:75)}type();
+
+const obs=new IntersectionObserver(es=>es.forEach(e=>{if(!e.isIntersecting)return;
+e.target.classList.add('visible');
+if(e.target.matches('.metrics'))qsa('[data-count]').forEach(animate);
+obs.unobserve(e.target)}),{threshold:.16});
+qsa('.reveal,.metrics').forEach(e=>obs.observe(e));
+function animate(el){const end=+el.dataset.count,start=performance.now();
+function tick(t){el.textContent=Math.min(end,Math.round((t-start)/1200*end));
+if(t-start<1200)requestAnimationFrame(tick)}requestAnimationFrame(tick)}
+const sections=qsa('main section[id]'),links=qsa('.navlinks a');
+addEventListener('scroll',()=>{let id='home';
+sections.forEach(s=>{if(scrollY>=s.offsetTop-180)id=s.id});
+links.forEach(a=>a.classList.toggle('active',a.getAttribute('href')==='#'+id))});
+qs('.theme').onclick=()=>{document.body.classList.toggle('light');
+qs('.theme').textContent=document.body.classList.contains('light')?'☀':'☾'};
+qsa('.about-card,.service,.project').forEach(c=>{c.onpointermove=e=>{const r=c.getBoundingClientRect(),x=(e.clientX-r.left)/r.width-.5,y=(e.clientY-r.top)/r.height-.5;
+c.style.transform='perspective(700px) rotateY('+(x*5)+'deg) rotateX('+(-y*5)+'deg) translateY(-5px)'};
+c.onpointerleave=()=>c.style.transform=''});
+const lightbox=document.createElement('div');
+lightbox.className='lightbox';
+lightbox.innerHTML='<figure><button class="lightbox-close" aria-label="Close image">×</button><img alt=""><figcaption></figcaption></figure>';
+document.body.appendChild(lightbox);
+const lightboxImg=lightbox.querySelector('img'),lightboxCaption=lightbox.querySelector('figcaption');
+qsa('.shot').forEach(button=>button.onclick=()=>{lightboxImg.src=button.dataset.image;
+lightboxImg.alt=button.dataset.caption;
+lightboxCaption.textContent=button.dataset.caption;
+lightbox.classList.add('open');
+document.body.style.overflow='hidden'});
+function closeLightbox(){lightbox.classList.remove('open');
+document.body.style.overflow=''}
+lightbox.querySelector('.lightbox-close').onclick=closeLightbox;
+lightbox.onclick=e=>{if(e.target===lightbox)closeLightbox()};
+addEventListener('keydown',e=>{if(e.key==='Escape')closeLightbox()});
+qs('#year').textContent=new Date().getFullYear();
