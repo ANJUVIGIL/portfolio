@@ -25,9 +25,11 @@ nav{height:82px;display:flex;align-items:center;gap:35px}
 .orbit{position:absolute;z-index:4;width:390px;height:390px;border:2px solid #d8f8ff;border-radius:50%;transform:rotate(-28deg)}
 .orbit.two{width:425px;height:330px;border-color:#13e0d077;transform:rotate(25deg);animation:spin 18s linear infinite}
 .float-badge{position:absolute;z-index:5;display:grid;place-items:center;width:48px;height:48px;border:1px solid #18d4ff66;border-radius:14px;background:#062533dd;color:var(--cyan);font-weight:800;box-shadow:0 12px 30px #00101899;animation:float 4s ease-in-out infinite}
-.b1{left:4%;top:25%}
-.b2{right:3%;top:17%;animation-delay:-1s}
-.b3{right:2%;bottom:17%;animation-delay:-2s}
+.b1{left:0;top:22%}
+.b2{right:0;top:15%;animation-delay:-.8s}
+.b3{right:-1%;bottom:17%;animation-delay:-1.6s}
+.b4{left:1%;bottom:15%;animation-delay:-2.4s}
+.b5{left:50%;bottom:-5%;margin-left:-24px;animation-delay:-3.2s}
 .hello{margin:0;color:#c1d2da;font-size:19px;font-weight:700}
 .hero h1{margin:0;font-size:clamp(44px,5vw,65px);line-height:1.05;letter-spacing:-2.5px}
 .hero h2{margin:7px 0 20px;font-size:clamp(24px,3vw,38px)}
@@ -130,6 +132,12 @@ footer a{color:var(--text);text-decoration:none}
 .blob{width:300px;height:315px}
 .orbit{width:310px;height:310px}
 .orbit.two{width:330px;height:270px}
+.float-badge{width:42px;height:42px;border-radius:12px;font-size:12px}
+.b1{left:-1%;top:20%}
+.b2{right:-1%;top:14%}
+.b3{right:-2%;bottom:15%}
+.b4{left:0;bottom:13%}
+.b5{bottom:-5%;margin-left:-21px}
 .metric-grid{grid-template-columns:1fr 1fr;gap:22px}
 .metric-grid div:nth-child(2){border:0}
 .metric-grid b{font-size:31px}
